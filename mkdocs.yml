@@ -1,0 +1,47 @@
+site_name: 交通事故处理指南
+site_description: 面向普通驾驶人与乘客的交通事故处置、责任认定与保险理赔实用手册
+site_author: jtsgGuide
+site_url: ""
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - attr_list
+  - def_list
+  - pymdownx.details
+  - pymdownx.superfences
+
+extra:
+  generator: false
+
+nav:
+  - 首页: index.md
+  - 事故现场:
+      - 现场处置总览: 01-现场处置.md
+      - 快速检查清单: checklist.md
+  - 处理流程:
+      - 报警与报险: 02-报警与报险.md
+      - 责任认定: 03-责任认定.md
+      - 保险理赔: 04-保险理赔.md
+  - 风险与法律:
+      - 法律风险提示: 05-法律风险提示.md
+      - 常见问题: faq.md
+
+extra_css:
+  - stylesheets/extra.css
