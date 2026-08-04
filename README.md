@@ -27,3 +27,17 @@ mkdocs build
 ```
 
 构建产物位于 `site/` 目录。
+
+## 4. 发布到 GitHub Pages（自动）
+
+项目已内置 GitHub Actions 工作流：`.github/workflows/deploy-pages.yml`。
+
+首次启用需要在 GitHub 仓库中设置：
+
+1. 进入仓库 `Settings` -> `Pages`
+2. 在 `Build and deployment` 中将 `Source` 设为 `GitHub Actions`
+3. 推送到 `main` 分支后会自动触发部署
+
+部署完成后访问：
+
+- <https://cliftonzgh.github.io/jtsgGuide/>

@@ -1,7 +1,7 @@
 site_name: 交通事故处理指南
 site_description: 面向普通驾驶人与乘客的交通事故处置、责任认定与保险理赔实用手册
 site_author: jtsgGuide
-site_url: ""
+site_url: https://cliftonzgh.github.io/jtsgGuide/
 
 theme:
   name: material
