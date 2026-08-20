@@ -17,6 +17,60 @@
   animation: fade-in 0.35s ease;
 }
 
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+  color: #5f6368;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link {
+  margin-top: 0.45rem;
+  color: #374151;
+  font-size: 0.94rem;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__list {
+  margin: 0.15rem 0 0.45rem 0.35rem;
+  padding-left: 0.65rem;
+  border-left: 0.12rem solid #d8e7e4;
+}
+
+.md-nav--primary
+  > .md-nav__list
+  > .md-nav__item
+  > .md-nav__list
+  > .md-nav__item--section
+  > .md-nav__link {
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.2rem;
+  background: #f1f7f6;
+  color: #147a70;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.md-nav--primary
+  > .md-nav__list
+  > .md-nav__item
+  > .md-nav__list
+  > .md-nav__item--section
+  > .md-nav__list {
+  margin-left: 0.35rem;
+  padding-left: 0.7rem;
+  border-left: 0.08rem solid #e5eceb;
+}
+
+.md-nav--primary .md-nav__item--section .md-nav__item .md-nav__link {
+  color: #4b5563;
+  font-size: 0.81rem;
+}
+
+.md-nav--primary .md-nav__item--section .md-nav__item .md-nav__link--active {
+  color: #0d8a7d;
+  font-weight: 700;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
