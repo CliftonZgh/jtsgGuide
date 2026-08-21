@@ -21,13 +21,26 @@ FIELD_LABELS = {
     "death_base": "死亡赔偿金基数",
     "notes": "备注",
 }
+DEFAULT_NOTES = {
+    "medical": "需要与事故相关的正规医疗票据、费用明细和病历材料。",
+    "hospital_meal": "按实际住院天数和适用地区标准核对。",
+    "accommodation": "仅记录必要、合理且有凭证的住宿支出。",
+    "nutrition": "通常需要医嘱或鉴定意见支持营养期限和必要性。",
+    "care": "核对护理期限、护理人数、护理方式和护理证明。",
+    "lost_work": "优先按实际收入减少计算，并保存误工和收入证明。",
+    "traffic": "仅记录就医、复诊、鉴定等必要且合理的交通支出。",
+    "follow_up": "根据医嘱、鉴定意见或实际发生的后续治疗费用核对。",
+    "disability_base": "需要结合伤残等级、年龄、适用地区和赔偿年限核算。",
+    "death_base": "需要结合死亡人员年龄、适用地区和赔偿年限核算。",
+}
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Generate compensation-standard pages and a yearly index from CSV."
     )
-    parser.add_argument("--csv", required=True, type=Path, help="Input CSV path")
+    parser.add_argument("--csv", required=True,
+                        type=Path, help="Input CSV path")
     parser.add_argument("--year", type=int, help="Only generate this year")
     parser.add_argument(
         "--docs-dir", type=Path, default=Path("docs"), help="MkDocs docs directory"
@@ -63,7 +76,8 @@ def read_rows(csv_path: Path, selected_year: int | None) -> list[dict[str, str]]
             try:
                 year = int(row["year"])
             except ValueError as error:
-                raise ValueError(f"CSV 第 {line_number} 行的 year 不是整数") from error
+                raise ValueError(
+                    f"CSV 第 {line_number} 行的 year 不是整数") from error
             if selected_year is not None and year != selected_year:
                 continue
             row["year"] = str(year)
@@ -105,8 +119,10 @@ def standard_rows(row: dict[str, str]) -> str:
     ]
     for number, (field, default) in enumerate(items, start=1):
         value = row.get(field) or default
-        source = row.get("source") or row.get("notes") or "待补录来源"
-        lines.append(f"| {number} | {FIELD_LABELS[field]} | {value} | {source} |")
+        note = row.get(f"{field}_note") or DEFAULT_NOTES[field]
+        source = row.get("source") or "待补录来源"
+        lines.append(
+            f"| {number} | {FIELD_LABELS[field]} | {value} | {source}；{note} |")
     return "\n".join(lines)
 
 
@@ -169,8 +185,10 @@ def render_index(year: str, rows: list[dict[str, str]]) -> str:
         city = row["city"]
         label = province if not city else f"{province}{city}"
         relative = f"{safe_name(province)}/{safe_name(city) if city else '省级标准'}.md"
-        status = row.get("status") or ("待补录" if not row.get("source") else "已录入来源")
-        lines.append(f"| {number} | {label} | [{label}]({relative}) | {status} |")
+        status = row.get("status") or (
+            "待补录" if not row.get("source") else "已录入来源")
+        lines.append(
+            f"| {number} | {label} | [{label}]({relative}) | {status} |")
     return "\n".join(lines) + "\n"
 
 
